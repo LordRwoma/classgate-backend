@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Diperlukan Alpine.js supaya elemen x-cloak tidak "flash" sebelum Alpine siap */
+[x-cloak] {
+    display: none !important;
+}
+
+/* ============================================================
+   Styling khusus untuk konten hasil AI (Modul Ajar/LKPD/Asesmen)
+   HTML-nya cuma pakai h3/p/ol/table polos dari Gemini, jadi kita
+   percantik di sini supaya terlihat seperti dokumen resmi.
+   ============================================================ */
+.ai-output h3 {
+    color: #2b454e;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f6ff;
+    display: flex;
+    align-items: center;
+}
+.ai-output h3:first-child {
+    margin-top: 0;
+}
+.ai-output p {
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+.ai-output ol, .ai-output ul {
+    margin: 0.75rem 0 1.25rem 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: ai-list;
+}
+.ai-output ol > li, .ai-output ul > li {
+    counter-increment: ai-list;
+    position: relative;
+    padding: 0.6rem 0.75rem 0.6rem 2.5rem;
+    margin-bottom: 0.5rem;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    border: 1px solid #eef2f7;
+    line-height: 1.6;
+}
+.ai-output ol > li::before {
+    content: counter(ai-list);
+    position: absolute;
+    left: 0.75rem;
+    top: 0.6rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: #3072ed;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ai-output ul > li::before {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1.05rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: #3072ed;
+    border-radius: 9999px;
+}
+.ai-output table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+.ai-output th {
+    background: #2b454e;
+    color: white;
+    text-align: left;
+    padding: 0.6rem 0.9rem;
+    font-weight: 700;
+}
+.ai-output td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid #eef2f7;
+}
+.ai-output tr:nth-child(even) td {
+    background: #f8fafc;
+}
+.ai-output strong {
+    color: #2b454e;
+}
