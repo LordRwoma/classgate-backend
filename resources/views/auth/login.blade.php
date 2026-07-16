@@ -80,7 +80,7 @@
                     </button>
                 </form>
 
-                <div class="mt-4 relative">
+                <!-- <div class="mt-4 relative">
                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
                         <div class="w-full border-t border-gray-200"></div>
                     </div>
@@ -99,14 +99,14 @@
                         </svg>
                         <span class="text-[#2b454e]">Lanjutkan dengan Google</span>
                     </a>
-                </div>
+                </div> -->
 
                 <div class="mt-4 text-center">
                     <p class="text-xs text-gray-600 mb-1">
                         Belum bergabung dengan ClassGate? 
                         <a href="{{ route('register') }}" class="font-bold text-[#3072ed] hover:text-[#2d5299] hover:underline transition-all">Daftar akun baru</a>
                     </p>
-                    <p class="text-[10px] text-gray-400">Website ini dibuat oleh Tim Workshop Edifice 2 - LIDM ITDP</p>
+                    <p class="text-[10px] text-gray-400">Website ini dibuat oleh Tim Workshop Edifice 2 - LIDM ITDP UM</p>
                 </div>
 
             </div>

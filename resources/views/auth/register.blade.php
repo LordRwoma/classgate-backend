@@ -80,7 +80,7 @@
                     </button>
                 </form>
 
-                <div class="mt-3 relative">
+                <!-- <div class="mt-3 relative">
                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
                         <div class="w-full border-t border-gray-200"></div>
                     </div>
@@ -99,7 +99,7 @@
                         </svg>
                         <span class="text-[#2b454e]">Lanjutkan dengan Google</span>
                     </a>
-                </div>
+                </div> -->
 
                 <div class="mt-3 text-center">
                     <p class="text-xs text-gray-600 mb-1">
