@@ -26,7 +26,20 @@ RUN apt-get update && apt-get install -y \
 
 # Aktifkan mod_rewrite Apache (wajib untuk routing Laravel)
 RUN a2enmod rewrite
-RUN a2dismod mpm_event 2>/dev/null; a2dismod mpm_worker 2>/dev/null; a2enmod mpm_prefork
+
+# FIX BUG: image dasar ini kadang mengaktifkan 2 modul MPM sekaligus
+# (mpm_event + mpm_prefork), yang menyebabkan Apache gagal start dengan
+# error "More than one MPM loaded". a2dismod/a2enmod terbukti tidak cukup
+# di image ini, jadi kita hapus paksa symlink mods-enabled yang konflik
+# dan pasang ulang HANYA mpm_prefork secara langsung di filesystem.
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+          /etc/apache2/mods-enabled/mpm_event.conf \
+          /etc/apache2/mods-enabled/mpm_worker.load \
+          /etc/apache2/mods-enabled/mpm_worker.conf \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
+    && ls -la /etc/apache2/mods-enabled/ | grep mpm
+
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
