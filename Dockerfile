@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 
 # Aktifkan mod_rewrite Apache (wajib untuk routing Laravel)
 RUN a2enmod rewrite
-
+RUN a2dismod mpm_event 2>/dev/null; a2dismod mpm_worker 2>/dev/null; a2enmod mpm_prefork
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
