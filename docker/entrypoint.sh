@@ -3,12 +3,12 @@ set -e
 
 echo "==> Menyiapkan Laravel..."
 
-# PENTING: APP_KEY HARUS sudah di-set sebagai Environment Variable di Render.
+# PENTING: APP_KEY HARUS sudah di-set sebagai Environment Variable di Railway.
 # Container ini TIDAK punya file .env (sengaja di-.dockerignore), jadi
 # `artisan key:generate` tidak bisa dipakai di sini - generate di lokal dulu
-# lalu tempel hasilnya ke Render (lihat panduan).
+# lalu tempel hasilnya ke Railway (lihat panduan).
 if [ -z "$APP_KEY" ]; then
-    echo "!!! APP_KEY belum di-set di Environment Variables Render. Container akan gagal jalan."
+    echo "!!! APP_KEY belum di-set di Environment Variables Railway. Container akan gagal jalan."
     exit 1
 fi
 
@@ -24,5 +24,7 @@ php artisan view:cache
 echo "==> Menjalankan migration..."
 php artisan migrate --force
 
-echo "==> Selesai, menjalankan Apache..."
-exec "$@"
+# Railway memberi port lewat env var $PORT (bukan selalu 8080)
+RAILWAY_PORT="${PORT:-8080}"
+echo "==> Selesai, menjalankan php artisan serve di port ${RAILWAY_PORT}..."
+exec php artisan serve --host=0.0.0.0 --port="${RAILWAY_PORT}"
